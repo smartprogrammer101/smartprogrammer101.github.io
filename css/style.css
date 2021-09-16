@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,400;1,600&display=swap');
+:root {
+    color: hsl(0, 0%, 98%);
+    color: hsl(236, 33%, 92%);
+    color: hsl(233, 11%, 84%);
+    color: hsl(236, 9%, 61%);
+    color: hsl(235, 19%, 35%);
+
+    color: hsl(235, 21%, 11%);
+    color: hsl(235, 24%, 19%);
+    color: hsl(234, 39%, 85%);
+    color: hsl(236, 33%, 92%);
+    color: hsl(234, 11%, 52%);
+    color: hsl(233, 14%, 35%);
+    color: hsl(237, 14%, 26%);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Josefin Sans', sans-serif;
+    min-height: 100vh;
+    background-color: hsl(235, 21%, 11%);
+    color: hsl(0, 0%, 98%);
+    transition: background-color 1s;
+}
+header {
+    height: 40vh;
+    background-image: url("../images/bg-desktop-dark.jpg");
+    background-position: ;
+    background-size: cover;
+    transition: 1s;
+}
+#list-container,
+#create-todo-container {
+    border-radius: .5em
+}
+main {
+    padding: 0 1em;
+    position: relative;
+    top: -30vh;
+}
+h1 {
+    color: hsl(0, 0%, 98%);
+}
+#main-container {
+    /* border: solid; */
+    min-width: 300px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+#todo-title {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    margin-bottom: 3em;
+}
+#todo-title img {
+    cursor: pointer;
+}
+#create-todo-container {
+    display: flex;
+    align-items: center;
+}
+form,
+#list-container {
+    background-color: hsl(235, 24%, 19%);
+}
+form {
+    margin-bottom: 1em;
+    padding: 1em;
+    transition: background-color 1s;
+}
+form input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+#list-container {
+    margin-bottom: 1em;
+    transition: background-color 1s;
+}
+#list-container li {   
+    width: 100%;
+    border-bottom: 1px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+    overflow: hidden;
+    cursor: grab;
+}
+#list-container li p {    
+    animation: slide-down 200ms linear;
+}
+@keyframes slide-down {
+    0% {
+        transform: translateY(-2em);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+#list-container .wrapper {
+    display: flex;
+    align-items: center;
+}
+#list-container button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+#list-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    position: relative;
+}
+#list-footer h5 {
+    color: hsl(236, 9%, 61%);
+}
+#list-footer h5:not(#items-left) {
+    cursor: pointer;
+}
+#list-footer h5:not(#items-left)hover {
+    color: hsl(233, 11%, 84%);
+}
+#list-footer h5.active {
+    color: yellow;
+    font-weight: 700;
+}
+#filter-buttons {
+    display: flex;
+    gap: 1em;
+}
+
+.circle {
+    display: inline-block;
+    height: 1.2rem;
+    width: 1.2rem;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-right: 1.2rem;
+    cursor: pointer;
+}
+.circle.checked {
+    background-image: url("../images/icon-check.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    border-color: hsl(236, 9%, 61%);
+}
+.circle:hover {
+    border-color: hsl(236, 9%, 61%);
+}
+footer {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: hsl(235, 19%, 35%);
+    position: relative;
+    top: -30vh;
+}
+
+.lightmode {
+    color: hsl(234, 11%, 52%);
+    background-color: hsl(233, 11%, 84%);
+}
+.lightmode #create-todo-container,
+.lightmode #list-container {
+    background-color: hsl(0, 0%, 98%);
+}
+.lightmode #list-container li {
+    border-color: hsl(233, 11%, 84%);
+}
+.lightmode footer{
+    color: hsl(237, 14%, 26%);
+}
+.lightmode header {
+    background-image: url("../images/bg-desktop-light.jpg");
+}
+.lightmode #list-footer h5.active {
+    color: blue;
+    font-weight: 700;
+}
+.lightmode .circle.checked {
+    filter: invert(20%) sepia(29%) saturate(2476%) hue-rotate(250deg) brightness(118%) contrast(119%);
+}
+@media screen and (max-width: 430px) {
+    #filter-buttons {
+        gap: .5em;
+    }
+}
+@media screen and (max-width: 395px) {
+    #filter-buttons {
+        position: absolute;
+        top: 4em;
+        left: 0;
+        justify-content: center;
+        width: 100%;
+        /* border: solid; */
+        padding: 1em;
+    }
+    footer {
+        top: -20vh;
+    }
+}
