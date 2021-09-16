@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do app</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="darkmode">
+        <header></header>
+        <main>
+            <div id="main-container">                                               <!-- MAIN CONTENT -->
+                <div id="todo-title">
+                    <h1>TODO</h1>
+                    <img src="./images/icon-sun.svg" alt="">                   <!-- SUN / MOON -->
+                </div>
+                <form id="create-todo-container">                                  <!-- create todo list -->
+                    <div class="circle"></div>
+                    <input type="text"  id="new-todo" placeholder="Create a new todo..." autocomplete="off">
+                </form>
+                <ul id="list-container">                                                <!-- LIST ITEMS -->
+                    <div id="contain">
+                        <li>
+                            <div class="wrapper">
+                                <div class="circle checked"></div>
+                                <p>Complete online javascript course</p>
+                            </div>
+                            <button class="delete">
+                                <img src="./images/icon-cross.svg" alt="">
+                            </button>
+                        </li>
+                        <!-- <li>
+                            <div class="wrapper">
+                                <div class="circle"></div>
+                                <p>Complete online javascript course</p>
+                            </div>
+                            <button class="delete">
+                                <img src="./images/icon-cross.svg" alt="">
+                            </button>
+                        </li>
+                        <li>
+                            <div class="wrapper">
+                                <div class="circle"></div>
+                                <p>Complete online javascript course</p>
+                            </div>
+                            <button class="delete">
+                                <img src="./images/icon-cross.svg" alt="">
+                            </button>
+                        </li>
+                        <li>
+                            <div class="wrapper">
+                                <div class="circle"></div>
+                                <p>Complete online javascript course</p>
+                            </div>
+                            <button class="delete">
+                                <img src="./images/icon-cross.svg" alt="">
+                            </button>
+                        </li>
+                        <li>
+                            <div class="wrapper">
+                                <div class="circle"></div>
+                                <p>Complete online javascript course</p>
+                            </div>
+                            <button class="delete">
+                                <img src="./images/icon-cross.svg" alt="">
+                            </button>
+                        </li>
+                        <li>
+                            <div class="wrapper">
+                                <div class="circle"></div>
+                                <p>Complete online javascript course</p>
+                            </div>
+                            <button class="delete">
+                                <img src="./images/icon-cross.svg" alt="">
+                            </button>
+                        </li>
+                        <li>
+                            <div class="wrapper">
+                                <div class="circle"></div>
+                                <p>Complete online javascript course</p>
+                            </div>
+                            <button class="delete">
+                                <img src="./images/icon-cross.svg" alt="">
+                            </button>
+                        </li> -->
+                    </div>
+
+                        <div id="list-footer">                                      <!-- FILTER BUTTONS -->
+                            <h5 id="items-left"><span id="count">5</span> items left</h5>
+                            <div id="filter-buttons">
+                                <h5 id="all" class="active">All</h5>
+                                <h5 id="active">Active</h5>
+                                <h5 id="completed">Completed</h5>
+                            </div>
+                            <h5 id="clear-completed">Clear completed</h5>
+                        </div>
+                </ul>
+            </div>
+        </main>
+        <footer>
+            <h3>Drag and drop to reorder list</h3>
+        </footer>
+
+        <script src="./jQuery/jquery-3.6.0.js"></script>
+        <script src="./jquery-ui-1.12.1/jquery-ui.min.js"></script>
+        <script src="./script/script.js"></script>
+</body>
+</html>
