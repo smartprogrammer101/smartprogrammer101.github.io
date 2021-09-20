@@ -23,13 +23,15 @@
 
     function toggleMode() {
         document.body.classList.toggle("light-mode");
-        if (moon.getAttribute("src") == "./images/bright.png") moon.src = "./images/transparent.png";
-        else moon.src = "./images/bright.png";
-        if (search.getAttribute("src") === "./images/search-black.png") search.src = "./images/search.png";
-        else search.src = "./images/search-black.png";
-        if (goBack.getAttribute("src") == "./images/back-white.png") {
+        if (document.body.classList.contains("light-mode)) {
+            moon.src = "./images/transparent.png"
             goBack.src = "./images/back.png";
-        } else goBack.src = "./images/back-white.png";
+            search.src = "./images/search-black.png";
+        } else {
+            moon.src = "./images/bright.png";
+            goBack.src = "./images/back-white.png";
+            search.src = "./images/search.png";
+        }
     }
 
     function toggleFiterNav() {
