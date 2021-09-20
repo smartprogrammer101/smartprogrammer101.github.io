@@ -1,130 +1,219 @@
 (function() {
-    $(function() {
-        updateItemsCount();
-    })
-    $("#contain").sortable({containment: "parent"});
+    window.addEventListener("DOMContentLoaded", getCountriesData);
+    const fliterRegion = document.querySelector(".filter-region");
+    const filterNav = document.querySelector("#regions");
+    const mainMain = document.querySelector("main");
+    const main = document.querySelector("#main");
+    const form = document.forms[0];
+    const lis = filterNav.querySelectorAll("li");
+    const mode = document.getElementById("mode");
+    const moon = document.getElementById("moon");
+    const search = document.getElementById("search");
+    const goToTopButton = document.getElementById("top");
+    const nav = document.querySelector("nav");
+    let goBack = document.getElementById("go-back");
+
+    window.addEventListener("scroll", toggleGoToTopButton);
+    mode.addEventListener("click", toggleMode);
+    fliterRegion.addEventListener("click", toggleFiterNav);
+    form.addEventListener("input", filterBySearch);
+    form.addEventListener("submit", function(e){e.preventDefault();});
+    filterNav.addEventListener("click", filterByRegion);
 
 
-    const $listsContainer = $("#contain");
-    const todoForm = document.forms[0];
-    const newTodoInput = document.getElementById("new-todo");
-    const lis = document.querySelectorAll("#list-container li");
-    const circles = document.querySelectorAll(".circle");
-    const deleteButtons = document.querySelectorAll(".delete");
-    const $clearCompleted = $("#clear-completed");
-    const filterButtons = document.querySelectorAll("#filter-buttons h5");
-    const toggleModeImage = document.querySelector("#todo-title img");
-
-    toggleModeImage.addEventListener("click", changeMode);
-
-    function changeMode() {
-        document.body.classList.toggle("lightmode");
-        if (document.body.classList.contains("lightmode")) {
-            this.src = "./images/icon-moon.svg";
-        }
-        else {
-            this.src = "./images/icon-sun.svg";
-        }
+    function toggleMode() {
+        document.body.classList.toggle("light-mode");
+        if (moon.getAttribute("src") == "./images/bright.png") moon.src = "./images/transparent.png";
+        else moon.src = "./images/bright.png";
+        if (search.getAttribute("src") === "./images/search-black.png") search.src = "./images/search.png";
+        else search.src = "./images/search-black.png";
+        if (goBack.getAttribute("src") == "./images/back-white.png") {
+            goBack.src = "./images/back.png";
+        } else goBack.src = "./images/back-white.png";
     }
 
-    filterButtons.forEach(button => {
-        $(button).on("click", filterList);
-    });
+    function toggleFiterNav() {
+        // filterNav.classList.toggle("hide");
+        $(filterNav).slideToggle(200);
+    }
+
+    function getCountriesData() {
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://restcountries.eu/rest/v2/all");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.DONE) {
+                let response = xhr.response;
+                response = JSON.parse(response);
+                mainMain.innerHTML = "";
+                response.forEach(country => {
+                    const name = country.name;
+                    const flag = country.flag;
+                    const region = country.region;
+                    const capital = country.capital;
+                    const population = country.population.toLocaleString();
+                    const code = country.alpha3Code;
+                    
+                    const html = `
+                        <div class="flag-container">
+                            <img src=${flag}>
+                        </div>
+                        <div class="details">
+                            <h3 class="c-name">${name}</h3>
+                            <h4 class="population">Population: <span>${population}</span></h4>
+                            <h4 class="region">Region: <span>${region}</span></h4>
+                            <h4 class="capital">Capital: <span>${capital}</span></h4>
+                        </div>
+                    `;
+
+                const div = document.createElement("div");
+                div.setAttribute("class", "country");
+                div.dataset.code = code;
+                div.innerHTML = html;
+                mainMain.appendChild(div);
+                });
+                const countries = document.querySelectorAll(".country");
+                countries.forEach(country => {
+                    country.addEventListener("click", revealCountryDetail, true);
+                });
+            }
+        }
+        xhr.send();
+    }
     
-    lis.forEach(li => {
-        $(li).on("mousedown", function() {
-            $(this).css("cursor", "grabbing");
-        })
-        $(li).on("mouseup", function() {
-            $(this).css("cursor", "grab");
-        })
-    })
-
-    $(todoForm).on("submit", addTodoItem);
-
-    $clearCompleted.on("click", clearCompletedLists);
-
-    function addTodoItem(e) {
-        e.preventDefault();
-        const value = newTodoInput.value;
-        if (!value) return;
-        const $li = createItem(value);
-        $listsContainer.prepend($li);
-        $li.find(".circle").on("click", markList);
-        $li.find(".delete").on("click", removeItem);
-        updateItemsCount();
-        newTodoInput.value = "";
-        // console.log(value);
-    }
-
-    function createItem(val) {
-        const li = $("<li></li>");
-        const html = `
-        <div class="wrapper">
-            <div class="circle"></div>
-            <p>${val}</p>
-        </div>
-        <button class="delete">
-            <img src="./images/icon-cross.svg" alt="">
-        </button>`;
-        li.html(html);
-        // console.log(li);
-        return li;
-    }
-
-    circles.forEach(circle => {
-        $(circle).on("click", markList);
-    })
-    function markList() {
-        $(this).toggleClass("checked");
-    }
-    deleteButtons.forEach(button => {
-        $(button).on("click", removeItem);
-    });
-    function removeItem() {
-        $(this).closest("li").slideUp(function() {
-            $(this).remove();
-            updateItemsCount();
+    function filterBySearch(e) {
+        const countries = document.querySelectorAll(".country");
+        const value = form.elements[0].value.toLowerCase();
+        countries.forEach(country => {
+            const name = country.querySelector(".c-name").textContent.toLowerCase();
+            if (name.indexOf(value) === -1) {
+                $(country).slideUp(100);
+            } else {
+                $(country).slideDown(100);
+            }
         });
     }
-    function updateItemsCount() {
-        const $countDiv = $("#count");
-        const $lists = $("li");
-        $countDiv.text($lists.length);
+
+    function filterByRegion(e) {
+        $(filterNav).slideUp(200);
+        const countries = document.querySelectorAll(".country");
+        lis.forEach(li => {
+            li.classList.remove("active");
+        });
+        e.target.classList.add("active");
+        const id = e.target.id;
+        countries.forEach(country => {
+            const region = country.querySelector(".region span").textContent.toLowerCase();
+            if (region === id) {
+                $(country).slideDown(0);
+            } else {
+                $(country).slideUp(0);
+            }
+        });
+    }
+    function toggleGoToTopButton() {
+        if (pageYOffset > 4000) goToTopButton.classList.remove("hide");
+        else goToTopButton.classList.add("hide");
     }
 
-    function clearCompletedLists() {
-        const completed = document.querySelectorAll(".checked");
-        completed.forEach(list => {
-            $(list).closest("li").remove();
-        });
-        updateItemsCount();
+
+    function revealCountryDetail() {
+        reveal(this);   
     }
-    function filterList() {
-        $(this).addClass("active");
-        $(this).siblings().removeClass("active");
-        const lis = document.querySelectorAll("#list-container li");
-        const circles = document.querySelectorAll(".circle");
-        if (this.id == "all") {
-            $(lis).slideDown()
-        } else if (this.id == "completed") {
-            circles.forEach(circle => {
-                const li = $(circle).closest("li");
-                if (circle.classList.contains("checked")) {
-                    li.slideDown();
-                } else {
-                    li.slideUp();
-                }
-            });
-        } else { /** if active button */            
-            circles.forEach(circle => {
-                const li = $(circle).closest("li");
-                if (!circle.classList.contains("checked")) {
-                    li.slideDown();
-                } else {
-                    li.slideUp();
-                }
-            });
+    
+    function reveal(trigger) {
+        let cName;
+        nav.classList.add("hide");
+        mainMain.classList.add("hide");
+        if (trigger.nodeName == "DIV") {
+            cName = trigger.querySelector(".c-name").textContent;
+        } else {
+            cName = trigger.textContent;
+            console.log(cName);
         }
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", `https://restcountries.eu/rest/v2/name/${cName}?fullText=true`);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.DONE) {
+                const res = JSON.parse(this.response);
+                const responseObject = res[0];
+                console.log(responseObject);
+
+                let languages = "";                                             /** Get Languages */
+                let languagesObject = responseObject.languages;
+                if (languagesObject.length == 1) {
+                    languages = languagesObject[0].name;
+                } else {
+                    languages = languagesObject.reduce((acc, curr) => {
+                        return acc + curr.name + ", ";
+                    }, "");
+                    languages = languages.replace(/, $/, '');
+                }
+                let currencies = "";                                            /** Get Currencies */
+                let currenciesObject = responseObject.currencies;
+                if (currenciesObject.length == 1) {
+                    currencies = currenciesObject[0].name;
+                } else {
+                    currencies = currenciesObject.reduce((acc, curr) => {
+                        return acc + curr.name + ", ";
+                    }, '');
+                    languages = languages.replace(/, $/, '');
+                }
+
+                const countries = document.querySelectorAll(".country");        /** Border countries */
+                let borders = responseObject.borders;
+                let buttons = document.createElement("div");
+                buttons.setAttribute("class", "border-countries");
+                countries.forEach(country => {
+                    const code = country.dataset.code;
+                    let cName = country.querySelector(".c-name").textContent;
+                    if (borders.includes(code)) {
+                        const btn = document.createElement("button");
+                        btn.innerHTML = cName;
+                        btn.addEventListener("click", revealCountryDetail);
+                        buttons.appendChild(btn);
+                    }
+                });
+
+                main.innerHTML = `<section>
+                    <a href="./index.html" id="back">
+                        <img src="./images/back-white.png" id="go-back" alt="">
+                        <span>Back</span>
+                    </a>
+                    <div id="contain">
+                        <div id="detail-flag-container">
+                            <img src=${responseObject.flag} alt="">
+                        </div>
+                        <div class="second">
+                            <h2>${responseObject.name}</h2>
+                            <div class="country-detail">
+                                <div class="section-detail">
+                                    <div class="one">
+                                        <h4>Native Name: <span>${responseObject.nativeName}</span></h4>
+                                        <h4>Population: <span>${responseObject.population.toLocaleString()}</span></h4>
+                                        <h4>Region: <span>${responseObject.region}</span></h4>
+                                        <h4>Sub Region: <span>${responseObject.subregion}</span></h4>
+                                        <h4>Capital: <span>${responseObject.capital}</span></h4>
+                                    </div>
+                                    <div class="two">
+                                        <h4>Top Level Domain: <span>${responseObject.topLevelDomain}</span></h4>
+                                        <h4>Currencies: <span>${currencies}</span></h4>
+                                        <h4>Languages: <span>${languages}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border">
+                                <h3>Border Countries</h3>
+                                <div class="border-countries"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>`;
+                main.querySelector(".border-countries").appendChild(buttons);
+                goBack = document.getElementById("go-back");
+            }
+        }
+        xhr.send();
     }
+ 
+
 }());

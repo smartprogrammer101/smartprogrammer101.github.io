@@ -4,106 +4,156 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To do app</title>
+    <title>Document</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<body class="darkmode">
-        <header></header>
-        <main>
-            <div id="main-container">                                               <!-- MAIN CONTENT -->
-                <div id="todo-title">
-                    <h1>TODO</h1>
-                    <img src="./images/icon-sun.svg" alt="">                   <!-- SUN / MOON -->
-                </div>
-                <form id="create-todo-container">                                  <!-- create todo list -->
-                    <div class="circle"></div>
-                    <input type="text"  id="new-todo" placeholder="Create a new todo..." autocomplete="off">
-                </form>
-                <ul id="list-container">                                                <!-- LIST ITEMS -->
-                    <div id="contain">
-                        <li>
-                            <div class="wrapper">
-                                <div class="circle checked"></div>
-                                <p>Complete online javascript course</p>
-                            </div>
-                            <button class="delete">
-                                <img src="./images/icon-cross.svg" alt="">
-                            </button>
-                        </li>
-                        <!-- <li>
-                            <div class="wrapper">
-                                <div class="circle"></div>
-                                <p>Complete online javascript course</p>
-                            </div>
-                            <button class="delete">
-                                <img src="./images/icon-cross.svg" alt="">
-                            </button>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <div class="circle"></div>
-                                <p>Complete online javascript course</p>
-                            </div>
-                            <button class="delete">
-                                <img src="./images/icon-cross.svg" alt="">
-                            </button>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <div class="circle"></div>
-                                <p>Complete online javascript course</p>
-                            </div>
-                            <button class="delete">
-                                <img src="./images/icon-cross.svg" alt="">
-                            </button>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <div class="circle"></div>
-                                <p>Complete online javascript course</p>
-                            </div>
-                            <button class="delete">
-                                <img src="./images/icon-cross.svg" alt="">
-                            </button>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <div class="circle"></div>
-                                <p>Complete online javascript course</p>
-                            </div>
-                            <button class="delete">
-                                <img src="./images/icon-cross.svg" alt="">
-                            </button>
-                        </li>
-                        <li>
-                            <div class="wrapper">
-                                <div class="circle"></div>
-                                <p>Complete online javascript course</p>
-                            </div>
-                            <button class="delete">
-                                <img src="./images/icon-cross.svg" alt="">
-                            </button>
-                        </li> -->
-                    </div>
-
-                        <div id="list-footer">                                      <!-- FILTER BUTTONS -->
-                            <h5 id="items-left"><span id="count">5</span> items left</h5>
-                            <div id="filter-buttons">
-                                <h5 id="all" class="active">All</h5>
-                                <h5 id="active">Active</h5>
-                                <h5 id="completed">Completed</h5>
-                            </div>
-                            <h5 id="clear-completed">Clear completed</h5>
-                        </div>
-                </ul>
+<body id="page">
+    <header>
+        <h1>Where&nbsp;in&nbsp;the&nbsp;world?</h1>
+        <div class="mode-container">
+            <img src="./images/bright.png" id="moon" alt="">
+            <h2 id="mode">Dark&nbsp;Mode</h2>
+        </div>
+    </header>
+    <nav>
+        <form class="input-container">
+            <img id="search" src="./images/search.png" alt="">
+            <input type="text" placeholder="Search for a country...">
+        </form>
+        <div id="region">
+            <div class="filter-region">
+                <h4>Filter&nbsp;by&nbsp;region</h4>
+                <img src="./images/drop-down.png" alt="">
             </div>
-        </main>
-        <footer>
-            <h3>Drag and drop to reorder list</h3>
-        </footer>
+            <ul id="regions" class="hide">
+                <li id="africa">Africa</li>
+                <li id="americas">America</li>
+                <li id="asia">Asia</li>
+                <li id="europe">Europe</li>
+                <li id="oceania">Oceania</li>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div class="country">
+            <div class="flag-container">
+                <img src="./images/green-abstract-background-7.jpg" alt="">
+            </div>
+            <div class="details">
+                <h3 class="c-name">Germany</h3>
+                <h4 class="population">Population: <span>81,770,900</span></h4>
+                <h4 class="region">Region: <span>Europe</span></h4>
+                <h4 class="capital">Capital: <span>Berling</span></h4>
+            </div>
+        </div>
+        <div class="country">
+            <div class="flag-container">
+                <img src="./images/green-abstract-background-7.jpg" alt="">
+            </div>
+            <div class="details">
+                <h3 class="c-name">Germany</h3>
+                <h4 class="population">Population: <span>81,770,900</span></h4>
+                <h4 class="region">Region: <span>Europe</span></h4>
+                <h4 class="capital">Capital: <span>Berling</span></h4>
+            </div>
+        </div>
+        <div class="country">
+            <div class="flag-container">
+                <img src="./images/green-abstract-background-7.jpg" alt="">
+            </div>
+            <div class="details">
+                <h3 class="c-name">Germany</h3>
+                <h4 class="population">Population: <span>81,770,900</span></h4>
+                <h4 class="region">Region: <span>Europe</span></h4>
+                <h4 class="capital">Capital: <span>Berling</span></h4>
+            </div>
+        </div>
+        <div class="country">
+            <div class="flag-container">
+                <img src="./images/green-abstract-background-7.jpg" alt="">
+            </div>
+            <div class="details">
+                <h3 class="c-name">Germany</h3>
+                <h4 class="population">Population: <span>81,770,900</span></h4>
+                <h4 class="region">Region: <span>Europe</span></h4>
+                <h4 class="capital">Capital: <span>Berling</span></h4>
+            </div>
+        </div>
+        <div class="country">
+            <div class="flag-container">
+                <img src="./images/green-abstract-background-7.jpg" alt="">
+            </div>
+            <div class="details">
+                <h3 class="c-name">Germany</h3>
+                <h4 class="population">Population: <span>81,770,900</span></h4>
+                <h4 class="region">Region: <span>Europe</span></h4>
+                <h4 class="capital">Capital: <span>Berling</span></h4>
+            </div>
+        </div>
+        <div class="country">
+            <div class="flag-container">
+                <img src="./images/green-abstract-background-7.jpg" alt="">
+            </div>
+            <div class="details">
+                <h3 class="c-name">Germany</h3>
+                <h4 class="population">Population: <span>81,770,900</span></h4>
+                <h4 class="region">Region: <span>Europe</span></h4>
+                <h4 class="capital">Capital: <span>Berling</span></h4>
+            </div>
+        </div>
+        <div class="country">
+            <div class="flag-container">
+                <img src="./images/green-abstract-background-7.jpg" alt="">
+            </div>
+            <div class="details">
+                <h3 class="c-name">Germany</h3>
+                <h4 class="population">Population: <span>81,770,900</span></h4>
+                <h4 class="region">Region: <span>Europe</span></h4>
+                <h4 class="capital">Capital: <span>Berling</span></h4>
+            </div>
+        </div>
+        <div class="country">
+            <div class="flag-container">
+                <img src="./images/green-abstract-background-7.jpg" alt="">
+            </div>
+            <div class="details">
+                <h3 class="c-name">Germany</h3>
+                <h4 class="population">Population: <span>81,770,900</span></h4>
+                <h4 class="region">Region: <span>Europe</span></h4>
+                <h4 class="capital">Capital: <span>Berling</span></h4>
+            </div>
+        </div>
+        <div class="country">
+            <div class="flag-container">
+                <img src="./images/green-abstract-background-7.jpg" alt="">
+            </div>
+            <div class="details">
+                <h3 class="c-name">Germany</h3>
+                <h4 class="population">Population: <span>81,770,900</span></h4>
+                <h4 class="region">Region: <span>Europe</span></h4>
+                <h4 class="capital">Capital: <span>Berling</span></h4>
+            </div>
+        </div>
+        <div class="country">
+            <div class="flag-container">
+                <img src="./images/green-abstract-background-7.jpg" alt="">
+            </div>
+            <div class="details">
+                <h3 class="c-name">Germany</h3>
+                <h4 class="population">Population: <span>81,770,900</span></h4>
+                <h4 class="region">Region: <span>Europe</span></h4>
+                <h4 class="capital">Capital: <span>Berling</span></h4>
+            </div>
+        </div>
+    </main>
+    <div id="main"></div>
 
-        <script src="./jQuery/jquery-3.6.0.js"></script>
-        <script src="./jquery-ui-1.12.1/jquery-ui.min.js"></script>
-        <script src="./script/script.js"></script>
+    <a href="#page" id="top" class="hide">
+        <img src="./images/top.png">
+    </a>
+    
+    <script src="./jQuery/jquery-3.6.0.js"></script>
+    <script src="./jquery-ui-1.12.1/jquery-ui.min.js"></script>
+    <script src="./script/script.js"></script>
 </body>
 </html>
