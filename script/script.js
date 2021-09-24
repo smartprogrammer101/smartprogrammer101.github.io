@@ -23,7 +23,7 @@
 
     function toggleMode() {
         document.body.classList.toggle("light-mode");
-        if (document.body.classList.contains("light-mode)) {
+        if (document.body.classList.contains("light-mode")) {
             moon.src = "./images/transparent.png"
             goBack.src = "./images/back.png";
             search.src = "./images/search-black.png";
