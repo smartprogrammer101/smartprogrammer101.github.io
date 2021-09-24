@@ -1,5 +1,5 @@
 (function() {
-    window.addEventListener("load", getCountriesData);
+    window.addEventListener("DOMContentLoaded", getCountriesData);
     const fliterRegion = document.querySelector(".filter-region");
     const filterNav = document.querySelector("#regions");
     const mainMain = document.querySelector("main");
