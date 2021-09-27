@@ -1,221 +1,152 @@
 (function() {
-    window.addEventListener("DOMContentLoaded", getCountriesData);
-    const fliterRegion = document.querySelector(".filter-region");
-    const filterNav = document.querySelector("#regions");
-    const mainMain = document.querySelector("main");
-    const main = document.querySelector("#main");
-    const form = document.forms[0];
-    const lis = filterNav.querySelectorAll("li");
-    const mode = document.getElementById("mode");
-    const moon = document.getElementById("moon");
-    const search = document.getElementById("search");
-    const goToTopButton = document.getElementById("top");
-    const nav = document.querySelector("nav");
-    let goBack = document.getElementById("go-back");
-
-    window.addEventListener("scroll", toggleGoToTopButton);
-    mode.addEventListener("click", toggleMode);
-    fliterRegion.addEventListener("click", toggleFiterNav);
-    form.addEventListener("input", filterBySearch);
-    form.addEventListener("submit", function(e){e.preventDefault();});
-    filterNav.addEventListener("click", filterByRegion);
-
-
-    function toggleMode() {
-        document.body.classList.toggle("light-mode");
-        if (document.body.classList.contains("light-mode")) {
-            moon.src = "./images/transparent.png"
-            goBack.src = "./images/back.png";
-            search.src = "./images/search-black.png";
-        } else {
-            moon.src = "./images/bright.png";
-            goBack.src = "./images/back-white.png";
-            search.src = "./images/search.png";
-        }
-    }
-
-    function toggleFiterNav() {
-        // filterNav.classList.toggle("hide");
-        $(filterNav).slideToggle(200);
-    }
-
-    function getCountriesData() {
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://restcountries.eu/rest/v2/all");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.DONE) {
-                let response = xhr.response;
-                response = JSON.parse(response);
-                mainMain.innerHTML = "";
-                response.forEach(country => {
-                    const name = country.name;
-                    const flag = country.flag;
-                    const region = country.region;
-                    const capital = country.capital;
-                    const population = country.population.toLocaleString();
-                    const code = country.alpha3Code;
-                    
-                    const html = `
-                        <div class="flag-container">
-                            <img src=${flag}>
-                        </div>
-                        <div class="details">
-                            <h3 class="c-name">${name}</h3>
-                            <h4 class="population">Population: <span>${population}</span></h4>
-                            <h4 class="region">Region: <span>${region}</span></h4>
-                            <h4 class="capital">Capital: <span>${capital}</span></h4>
-                        </div>
-                    `;
-
-                const div = document.createElement("div");
-                div.setAttribute("class", "country");
-                div.dataset.code = code;
-                div.innerHTML = html;
-                mainMain.appendChild(div);
-                });
-                const countries = document.querySelectorAll(".country");
-                countries.forEach(country => {
-                    country.addEventListener("click", revealCountryDetail, true);
-                });
+    const wrapper = document.querySelector(".wrapper");
+    const filtersContainer = document.querySelector(".one");
+    const fill = document.getElementById("filter");
+    const clearButton = document.getElementById("clear");
+    clearButton.addEventListener("click", clearAll);
+    let allButtons;
+    let containers;
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "../data.json", false);
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.response) {
+                let data = this.response;
+                data = JSON.parse(data);
+                populatePage(data);
             }
         }
-        xhr.send();
     }
-    
-    function filterBySearch(e) {
-        const countries = document.querySelectorAll(".country");
-        const value = form.elements[0].value.toLowerCase();
-        countries.forEach(country => {
-            const name = country.querySelector(".c-name").textContent.toLowerCase();
-            if (name.indexOf(value) === -1) {
-                $(country).slideUp(100);
-            } else {
-                $(country).slideDown(100);
-            }
-        });
-    }
+    xhr.send();
 
-    function filterByRegion(e) {
-        $(filterNav).slideUp(200);
-        const countries = document.querySelectorAll(".country");
-        lis.forEach(li => {
-            li.classList.remove("active");
-        });
-        e.target.classList.add("active");
-        const id = e.target.id;
-        countries.forEach(country => {
-            const region = country.querySelector(".region span").textContent.toLowerCase();
-            if (region === id) {
-                $(country).slideDown(0);
-            } else {
-                $(country).slideUp(0);
-            }
-        });
-    }
-    function toggleGoToTopButton() {
-        if (pageYOffset > 4000) goToTopButton.classList.remove("hide");
-        else goToTopButton.classList.add("hide");
-    }
+    function populatePage(data) {
+        wrapper.innerHTML = "";
+        data.forEach(item => {
+            // console.log(item);
+            const languages = item.languages;
+            let buttons = '';
+            languages.forEach(language => {
+                buttons += "<button>" + language + "</button>";
+            });
+            // console.log(item);
+            let newOrFeatured = '';
+            const isNew = item.new;
+            const isFeatured = item.featured;
+            if (isNew) newOrFeatured += `<span class="new">NEW!</span>`;
+            if (isFeatured) newOrFeatured += `<span class="featured">FEATURED</span>`;
 
+            const div = document.createElement("div");
+            div.className = "container";
+            div.dataset.languages = languages;
 
-    function revealCountryDetail() {
-        reveal(this);   
-    }
-    
-    function reveal(trigger) {
-        let cName;
-        nav.classList.add("hide");
-        mainMain.classList.add("hide");
-        if (trigger.nodeName == "DIV") {
-            cName = trigger.querySelector(".c-name").textContent;
-        } else {
-            cName = trigger.textContent;
-            console.log(cName);
-        }
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", `https://restcountries.eu/rest/v2/name/${cName}?fullText=true`);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.DONE) {
-                const res = JSON.parse(this.response);
-                const responseObject = res[0];
-                console.log(responseObject);
-
-                let languages = "";                                             /** Get Languages */
-                let languagesObject = responseObject.languages;
-                if (languagesObject.length == 1) {
-                    languages = languagesObject[0].name;
-                } else {
-                    languages = languagesObject.reduce((acc, curr) => {
-                        return acc + curr.name + ", ";
-                    }, "");
-                    languages = languages.replace(/, $/, '');
-                }
-                let currencies = "";                                            /** Get Currencies */
-                let currenciesObject = responseObject.currencies;
-                if (currenciesObject.length == 1) {
-                    currencies = currenciesObject[0].name;
-                } else {
-                    currencies = currenciesObject.reduce((acc, curr) => {
-                        return acc + curr.name + ", ";
-                    }, '');
-                    languages = languages.replace(/, $/, '');
-                }
-
-                const countries = document.querySelectorAll(".country");        /** Border countries */
-                let borders = responseObject.borders;
-                let buttons = document.createElement("div");
-                buttons.setAttribute("class", "border-countries");
-                countries.forEach(country => {
-                    const code = country.dataset.code;
-                    let cName = country.querySelector(".c-name").textContent;
-                    if (borders.includes(code)) {
-                        const btn = document.createElement("button");
-                        btn.innerHTML = cName;
-                        btn.addEventListener("click", revealCountryDetail);
-                        buttons.appendChild(btn);
-                    }
-                });
-
-                main.innerHTML = `<section>
-                    <a href="./index.html" id="back">
-                        <img src="./images/back-white.png" id="go-back" alt="">
-                        <span>Back</span>
-                    </a>
-                    <div id="contain">
-                        <div id="detail-flag-container">
-                            <img src=${responseObject.flag} alt="">
-                        </div>
-                        <div class="second">
-                            <h2>${responseObject.name}</h2>
-                            <div class="country-detail">
-                                <div class="section-detail">
-                                    <div class="one">
-                                        <h4>Native Name: <span>${responseObject.nativeName}</span></h4>
-                                        <h4>Population: <span>${responseObject.population.toLocaleString()}</span></h4>
-                                        <h4>Region: <span>${responseObject.region}</span></h4>
-                                        <h4>Sub Region: <span>${responseObject.subregion}</span></h4>
-                                        <h4>Capital: <span>${responseObject.capital}</span></h4>
+            const html = `
+                                    <div class="left">
+                                        <img src=${item.logo} class="logo" alt="">
+                                        <div class="main">
+                                            <div class="top">
+                                                <span class="company">${item.company}</span>
+                                                ${newOrFeatured}
+                                            </div>
+                                            <h2>${item.position}</h2>
+                                            <div class="bottom flex-centered">
+                                                <span>${item.postedAt}</span>
+                                                <span class="dot"></span>
+                                                <span>${item.contract}</span>
+                                                <span class="dot"></span>
+                                                <span>${item.location}</span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="filter-buttons">
+                                            ${buttons}
                                     </div>
-                                    <div class="two">
-                                        <h4>Top Level Domain: <span>${responseObject.topLevelDomain}</span></h4>
-                                        <h4>Currencies: <span>${currencies}</span></h4>
-                                        <h4>Languages: <span>${languages}</h4>
-                                    </div>
+                                `;
+
+            div.innerHTML = html;
+            wrapper.appendChild(div);
+            const featured = div.querySelector(".featured");
+            if (featured) div.classList.add("border-left");
+        });
+        allButtons = document.querySelectorAll("button");
+        containers = document.querySelectorAll(".container");
+    }
+    allButtons.forEach(button => {
+        button.addEventListener("click", filter);
+    });
+    function filter() {
+        fill.classList.remove("hide");
+        const text = this.textContent;
+        const filters = filtersContainer.dataset.filters;
+        if (filters.indexOf(text) == -1) {
+            createFilterButton(this.textContent);
+            const filtersButtons = filtersContainer.querySelectorAll(".filter-cancelable");
+            containers.forEach(container => {
+                const buttons = container.querySelectorAll("button");
+                const text = this.textContent;
+                const languages = container.dataset.languages;
+                if (languages.indexOf(text) == -1 || buttons.length < filtersButtons.length) container.classList.add("hide");
+                // else container.classList.remove("hide");
+            });
+        }
+    }
+
+    function createFilterButton(text) {
+        filtersContainer.dataset.filters += text;
+        // console.log(filtersContainer.dataset.filters);
+        const div = document.createElement("div");
+        div.className = "filter-cancelable";
+        const html = `
+                                <span>${text}</span>
+                                <div class="cancel">
+                                    <img src="./images/icon-remove.svg" alt="">
                                 </div>
-                            </div>
-                            <div class="border">
-                                <h3>Border Countries</h3>
-                                <div class="border-countries"></div>
-                            </div>
-                        </div>
-                    </div>
-                </section>`;
-                main.querySelector(".border-countries").appendChild(buttons);
-                goBack = document.getElementById("go-back");
-            }
-        }
-        xhr.send();
+                            `;
+        div.innerHTML = html;
+        const cancelButton = div.querySelector(".cancel");
+        cancelButton.addEventListener("click", removeFilter);
+        
+        filtersContainer.appendChild(div);
     }
- 
 
-}());
+    function clearAll() {
+        filtersContainer.innerHTML = '';
+        filtersContainer.dataset.filters = '';
+        containers.forEach(container => {
+            container.classList.remove("hide");
+        });
+        fill.classList.add("hide");
+    }
+
+    function removeFilter() {
+        this.parentElement.remove();
+        const removedText = this.previousElementSibling.textContent;
+        if (filtersContainer.innerHTML == '') fill.classList.add("hide");
+        let filterText = filtersContainer.dataset.filters;
+        filtersContainer.dataset.filters = filterText.replace(new RegExp(removedText, 'g'), '');
+
+        containers.forEach(container => {                                               /** LOOPING ALL CONTAINERS */
+            
+            // const languages = container.dataset.languages;
+            filterText = filtersContainer.dataset.filters;
+            // console.log(filterText);
+            if (true) {                                 /** If removed text is NOT in filters text */
+                const toArray = container.dataset.languages.split(',');
+                let count = 0;
+                for (let i = 0; i < toArray.length; i++) {
+                    const text = toArray[i];
+                    if (filterText.indexOf(text) != -1) {
+                        count++;
+                    }
+                }
+                if (count === filtersContainer.childElementCount) {
+                    container.classList.remove("hide");
+                    // console.log("yeah");
+                } else {
+                    container.classList.add("hide");
+                    // console.log(toArray.length);
+                }
+            }
+
+        });
+    }
+}())

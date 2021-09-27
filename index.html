@@ -4,156 +4,103 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countries Details</title>
+    <title>Job Listing</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
-<body id="page">
-    <header>
-        <h1>Where&nbsp;in&nbsp;the&nbsp;world?</h1>
-        <div class="mode-container">
-            <img src="./images/bright.png" id="moon" alt="">
-            <h2 id="mode">Dark&nbsp;Mode</h2>
-        </div>
-    </header>
-    <nav>
-        <form class="input-container">
-            <img id="search" src="./images/search.png" alt="">
-            <input type="text" placeholder="Search for a country...">
-        </form>
-        <div id="region">
-            <div class="filter-region">
-                <h4>Filter&nbsp;by&nbsp;region</h4>
-                <img src="./images/drop-down.png" alt="">
+<body>
+        <header></header>
+        <section>
+            <div id="filter" class="hide">
+                <div class="one" data-filters=""></div>
+                <h4 id="clear">Clear</h4>
             </div>
-            <ul id="regions" class="hide">
-                <li id="africa">Africa</li>
-                <li id="americas">America</li>
-                <li id="asia">Asia</li>
-                <li id="europe">Europe</li>
-                <li id="oceania">Oceania</li>
-            </ul>
-        </div>
-    </nav>
-    <main>
-        <div class="country">
-            <div class="flag-container">
-                <img src="./images/green-abstract-background-7.jpg" alt="">
-            </div>
-            <div class="details">
-                <h3 class="c-name">Germany</h3>
-                <h4 class="population">Population: <span>81,770,900</span></h4>
-                <h4 class="region">Region: <span>Europe</span></h4>
-                <h4 class="capital">Capital: <span>Berling</span></h4>
-            </div>
-        </div>
-        <div class="country">
-            <div class="flag-container">
-                <img src="./images/green-abstract-background-7.jpg" alt="">
-            </div>
-            <div class="details">
-                <h3 class="c-name">Germany</h3>
-                <h4 class="population">Population: <span>81,770,900</span></h4>
-                <h4 class="region">Region: <span>Europe</span></h4>
-                <h4 class="capital">Capital: <span>Berling</span></h4>
-            </div>
-        </div>
-        <div class="country">
-            <div class="flag-container">
-                <img src="./images/green-abstract-background-7.jpg" alt="">
-            </div>
-            <div class="details">
-                <h3 class="c-name">Germany</h3>
-                <h4 class="population">Population: <span>81,770,900</span></h4>
-                <h4 class="region">Region: <span>Europe</span></h4>
-                <h4 class="capital">Capital: <span>Berling</span></h4>
-            </div>
-        </div>
-        <div class="country">
-            <div class="flag-container">
-                <img src="./images/green-abstract-background-7.jpg" alt="">
-            </div>
-            <div class="details">
-                <h3 class="c-name">Germany</h3>
-                <h4 class="population">Population: <span>81,770,900</span></h4>
-                <h4 class="region">Region: <span>Europe</span></h4>
-                <h4 class="capital">Capital: <span>Berling</span></h4>
-            </div>
-        </div>
-        <div class="country">
-            <div class="flag-container">
-                <img src="./images/green-abstract-background-7.jpg" alt="">
-            </div>
-            <div class="details">
-                <h3 class="c-name">Germany</h3>
-                <h4 class="population">Population: <span>81,770,900</span></h4>
-                <h4 class="region">Region: <span>Europe</span></h4>
-                <h4 class="capital">Capital: <span>Berling</span></h4>
-            </div>
-        </div>
-        <div class="country">
-            <div class="flag-container">
-                <img src="./images/green-abstract-background-7.jpg" alt="">
-            </div>
-            <div class="details">
-                <h3 class="c-name">Germany</h3>
-                <h4 class="population">Population: <span>81,770,900</span></h4>
-                <h4 class="region">Region: <span>Europe</span></h4>
-                <h4 class="capital">Capital: <span>Berling</span></h4>
-            </div>
-        </div>
-        <div class="country">
-            <div class="flag-container">
-                <img src="./images/green-abstract-background-7.jpg" alt="">
-            </div>
-            <div class="details">
-                <h3 class="c-name">Germany</h3>
-                <h4 class="population">Population: <span>81,770,900</span></h4>
-                <h4 class="region">Region: <span>Europe</span></h4>
-                <h4 class="capital">Capital: <span>Berling</span></h4>
-            </div>
-        </div>
-        <div class="country">
-            <div class="flag-container">
-                <img src="./images/green-abstract-background-7.jpg" alt="">
-            </div>
-            <div class="details">
-                <h3 class="c-name">Germany</h3>
-                <h4 class="population">Population: <span>81,770,900</span></h4>
-                <h4 class="region">Region: <span>Europe</span></h4>
-                <h4 class="capital">Capital: <span>Berling</span></h4>
-            </div>
-        </div>
-        <div class="country">
-            <div class="flag-container">
-                <img src="./images/green-abstract-background-7.jpg" alt="">
-            </div>
-            <div class="details">
-                <h3 class="c-name">Germany</h3>
-                <h4 class="population">Population: <span>81,770,900</span></h4>
-                <h4 class="region">Region: <span>Europe</span></h4>
-                <h4 class="capital">Capital: <span>Berling</span></h4>
-            </div>
-        </div>
-        <div class="country">
-            <div class="flag-container">
-                <img src="./images/green-abstract-background-7.jpg" alt="">
-            </div>
-            <div class="details">
-                <h3 class="c-name">Germany</h3>
-                <h4 class="population">Population: <span>81,770,900</span></h4>
-                <h4 class="region">Region: <span>Europe</span></h4>
-                <h4 class="capital">Capital: <span>Berling</span></h4>
-            </div>
-        </div>
-    </main>
-    <div id="main"></div>
+        </section>
+        <main>
+            <div class="wrapper">
+                    <div class="container border-left">
+                        <div class="left">
+                            <img src="./images/account.svg" class="logo" alt="">
+                            <div class="main">
+                                <div class="top">
+                                    <span class="company">Photosnap</span>
+                                    <span class="new">NEW!</span>
+                                    <span class="featured">FEATURED</span>
+                                </div>
+                                <h2>Senior Frontend Developer</h2>
+                                <div class="bottom flex-centered">
+                                    <span>1d ago</span>
+                                    <span class="dot"></span>
+                                    <span>Full Time</span>
+                                    <span class="dot"></span>
+                                    <span>USA only</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-buttons">
+                            <button>Frontend</button>
+                            <button>Senior</button>
+                            <button>HTML</button>
+                            <button>CSS</button>
+                            <button>JavaScript</button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="left">
+                            <img src="./images/account.svg" class="logo" alt="">
+                            <div class="main">
+                                <div class="top">
+                                    <span class="company">Photosnap</span>
+                                    <span class="new">NEW!</span>
+                                    <span class="featured">FEATURED</span>
+                                </div>
+                                <h2>Senior Frontend Developer</h2>
+                                <div class="bottom flex-centered">
+                                    <span>1d ago</span>
+                                    <span class="dot"></span>
+                                    <span>Full Time</span>
+                                    <span class="dot"></span>
+                                    <span>USA only</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-buttons">
+                            <button>Frontend</button>
+                            <button>Senior</button>
+                            <button>HTML</button>
+                            <button>CSS</button>
+                            <button>JavaScript</button>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="left">
+                            <img src="./images/account.svg" class="logo" alt="">
+                            <div class="main">
+                                <div class="top">
+                                    <span class="company">Photosnap</span>
+                                    <span class="new">NEW!</span>
+                                    <span class="featured">FEATURED</span>
+                                </div>
+                                <h2>Senior Frontend Developer</h2>
+                                <div class="bottom flex-centered">
+                                    <span>1d ago</span>
+                                    <span class="dot"></span>
+                                    <span>Full Time</span>
+                                    <span class="dot"></span>
+                                    <span>USA only</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-buttons">
+                            <button>Frontend</button>
+                            <button>Senior</button>
+                            <button>HTML</button>
+                            <button>CSS</button>
+                            <button>JavaScript</button>
+                        </div>
+                    </div>
+                </div>
+        </main>
 
-    <a href="#page" id="top" class="hide">
-        <img src="./images/top.png">
-    </a>
-    
-    <script src="./jQuery/jquery-3.6.0.js"></script>
-    <script src="./jquery-ui-1.12.1/jquery-ui.min.js"></script>
-    <script src="./script/script.js"></script>
+        <script src="./script/script.js"></script>
 </body>
 </html>
