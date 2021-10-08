@@ -4,103 +4,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Listing</title>
+    <title>Launch Countdown Timer</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="./jquery-ui-1.12.1/jquery-ui.structure.css">
+    <link rel="stylesheet" href="./jquery-ui-1.12.1/jquery-ui.theme.css">
 </head>
 <body>
-        <header></header>
-        <section>
-            <div id="filter" class="hide">
-                <div class="one" data-filters=""></div>
-                <h4 id="clear">Clear</h4>
+    <div id="container">
+        <h1>WE'RE ARE LAUNCHING SOON</h1>
+        <div id="time-container">
+            <div class="time-box">
+                <div class="number" id="day">08</div>
+                <h4>DAYS</h4>
             </div>
-        </section>
-        <main>
-            <div class="wrapper">
-                    <div class="container border-left">
-                        <div class="left">
-                            <img src="./images/account.svg" class="logo" alt="">
-                            <div class="main">
-                                <div class="top">
-                                    <span class="company">Photosnap</span>
-                                    <span class="new">NEW!</span>
-                                    <span class="featured">FEATURED</span>
-                                </div>
-                                <h2>Senior Frontend Developer</h2>
-                                <div class="bottom flex-centered">
-                                    <span>1d ago</span>
-                                    <span class="dot"></span>
-                                    <span>Full Time</span>
-                                    <span class="dot"></span>
-                                    <span>USA only</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filter-buttons">
-                            <button>Frontend</button>
-                            <button>Senior</button>
-                            <button>HTML</button>
-                            <button>CSS</button>
-                            <button>JavaScript</button>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="left">
-                            <img src="./images/account.svg" class="logo" alt="">
-                            <div class="main">
-                                <div class="top">
-                                    <span class="company">Photosnap</span>
-                                    <span class="new">NEW!</span>
-                                    <span class="featured">FEATURED</span>
-                                </div>
-                                <h2>Senior Frontend Developer</h2>
-                                <div class="bottom flex-centered">
-                                    <span>1d ago</span>
-                                    <span class="dot"></span>
-                                    <span>Full Time</span>
-                                    <span class="dot"></span>
-                                    <span>USA only</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filter-buttons">
-                            <button>Frontend</button>
-                            <button>Senior</button>
-                            <button>HTML</button>
-                            <button>CSS</button>
-                            <button>JavaScript</button>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="left">
-                            <img src="./images/account.svg" class="logo" alt="">
-                            <div class="main">
-                                <div class="top">
-                                    <span class="company">Photosnap</span>
-                                    <span class="new">NEW!</span>
-                                    <span class="featured">FEATURED</span>
-                                </div>
-                                <h2>Senior Frontend Developer</h2>
-                                <div class="bottom flex-centered">
-                                    <span>1d ago</span>
-                                    <span class="dot"></span>
-                                    <span>Full Time</span>
-                                    <span class="dot"></span>
-                                    <span>USA only</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filter-buttons">
-                            <button>Frontend</button>
-                            <button>Senior</button>
-                            <button>HTML</button>
-                            <button>CSS</button>
-                            <button>JavaScript</button>
-                        </div>
-                    </div>
-                </div>
-        </main>
+            <div class="time-box">
+                <div class="number" id="hour">23</div>
+                <h4>HOURS</h4>
+            </div>
+            <div class="time-box">
+                <div class="number" id="min">55</div>
+                <h4>MINUTES</h4>
+            </div>
+            <div class="time-box">
+                <div class="number" id="sec">41</div>
+                <h4>SECONDS</h4>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div id="handles">
+            <img src="./images/icon-facebook.svg" alt="">
+            <img src="./images/icon-pinterest.svg" alt="">
+            <img src="./images/icon-instagram.svg" alt="">
+        </div>
+    </footer>
 
-        <script src="./script/script.js"></script>
+    <!-- <div class="st" id="con">
+        HELLO
+    </div>
+    <div class="st">
+        FUCK
+    </div>
+
+    <style>
+        #con {
+            color: white;
+            display: flex;
+            font-size: 3em;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            width: 200px;
+            background-color: black;
+            transform-origin: bottom center;
+            animation: rotate 1s 500ms;
+        }
+        @keyframes rotate {
+            to {transform: rotateX(180deg);}
+        }
+    </style> -->
 </body>
+
+<script src="./script/script.js"></script>
 </html>
