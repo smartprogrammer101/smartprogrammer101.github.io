@@ -17,6 +17,7 @@ body {
     padding: 1em;
     background-color: var(--very-dark-blue);
     background-image: url("../images/bg-stars.svg");
+    cursor: default;
 }
 h1,h4 {color: var(--white);}
 h1 {
