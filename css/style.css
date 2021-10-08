@@ -72,6 +72,9 @@ footer {
     display: flex;
     gap: 20px;
 }
+#handles > img {
+    cursor: pointer;
+}
 .rotate360 {transform: rotateX(360deg);}
 .rotate0 {transform: rotateX(0);}
 
