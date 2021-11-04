@@ -1,0 +1,24 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}" />
+<h2>{{room}} - Smart</h2>
+<section>{{room}}</section>
+<div class="wrapper">
+    <div class="container">
+        <div class="message">
+            <h3>{{username}}</h3>
+            <p class="para">Hello everyone, how are you guys doing?</p>
+            <p class="date">20th, April 2020</p>
+        </div>
+    </div>
+    <form class="chat-form" method="POST">
+    {% csrf_token %}
+        <input type="hidden" name="username" id="username" value="{{username}}">
+        <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}">
+        {% comment %} <input type="text" name="text" /> {% endcomment %}
+        <textarea rows="5" id="message"></textarea>
+        <input type="submit" />
+    </form>
+
+    <script src="{% static 'jquery-3.6.0.js' %}"></script>
+    <script src="{% static 'script.js' %}"></script>
+</div>
