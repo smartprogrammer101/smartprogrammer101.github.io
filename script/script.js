@@ -1,4 +1,4 @@
-const toate = new Date("2021/11/31");
+const toate = new Date("2022/04/1");
 const [dayBox, hourBox, minBox, secBox] = [
     document.getElementById("day"),
     document.getElementById("hour"),
